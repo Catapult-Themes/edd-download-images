@@ -3,7 +3,7 @@
 Plugin Name: EDD Download Images
 Plugin URI: http://sumobi.com/shop/edd-download-images/
 Description: Allows you to add additional images to a download
-Version: 1.1.1
+Version: 1.1.2
 Author: Andrew Munro, Sumobi
 Author URI: http://sumobi.com
 License: GPL-2.0+
@@ -47,11 +47,11 @@ function edd_di_get_images() {
  * Outputs each images with a CSS of 'edd-di-image'
  * @since 1.0
 */
-function edd_di_display_images() {
+function edd_di_display_images( $shortcode = false ) {
 	ob_start();
 	$download_images = edd_di_get_images();
 
-	if( $download_images ) {
+	if ( $download_images ) {
 		foreach ( $download_images as $download_image ) {
 			$html = '<img class="edd-di-image" src="' . $download_image['image'] . '" />';
 			echo apply_filters( 'edd_di_display_images', $html, $download_image );
@@ -59,7 +59,14 @@ function edd_di_display_images() {
 	}
 	
 	$images = ob_get_clean();
-	return $images;
+
+	if ( $shortcode ) {
+		return $images;
+	}
+	else {
+		echo $images;
+	}
+	
 }
 
 /**
@@ -189,8 +196,8 @@ add_filter( 'edd_metabox_save_edd_download_images', 'edd_di_metabox_image_save_c
  * Shortcode
  * @since 1.0
 */
-function edd_di_shortcode( $atts, $content = null) {
-	$content = edd_di_display_images();
+function edd_di_shortcode( $atts, $content = null ) {
+	$content = edd_di_display_images( true );
 
 	return $content;
 }

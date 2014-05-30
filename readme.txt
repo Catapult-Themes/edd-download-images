@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: easy digital downloads, digital downloads, e-downloads, edd, images, additional images, download images, sumobi
 Requires at least: 3.3
 Tested up to: 3.9 alpha
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,10 +100,13 @@ To fund ongoing development of more [free EDD plugins](http://profiles.wordpress
 
 == Upgrade Notice ==
 
-= 1.1.1 =
-Fixed to work with EDD v1.9. Requires Easy Digital Downloads v1.9 or greater
+= 1.1.2 =
+Fixed template tag not working from previous update
 
 == Changelog ==
+
+= 1.1.2 =
+* Fix: template tag not working from previous update
 
 = 1.1.1 =
 * Fix: [edd_download_images] not showing images in correct location
