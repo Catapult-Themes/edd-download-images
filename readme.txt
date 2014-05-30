@@ -100,13 +100,13 @@ To fund ongoing development of more [free EDD plugins](http://profiles.wordpress
 
 == Upgrade Notice ==
 
-= 1.1 =
+= 1.1.1 =
 Fixed to work with EDD v1.9. Requires Easy Digital Downloads v1.9 or greater
 
 == Changelog ==
 
 = 1.1.1 =
-* Fix: Download Images
+* Fix: [edd_download_images] not showing images in correct location
 
 = 1.1 =
 * Fix: Now working for EDD v1.9
