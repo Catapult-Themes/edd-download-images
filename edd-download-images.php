@@ -1,15 +1,14 @@
 <?php
 /*
 Plugin Name: EDD Download Images
-Plugin URI: http://sumobi.com/store/edd-download-images/
+Plugin URI: http://sumobi.com/shop/edd-download-images/
 Description: Allows you to add additional images to a download
-Version: 1.0
-Author: Andrew Munro - Sumobi
+Version: 1.1
+Author: Andrew Munro, Sumobi
 Author URI: http://sumobi.com
 License: GPL-2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
 */
-
 
 /**
  * Internationalization
@@ -19,19 +18,16 @@ function edd_di_textdomain() {
 }
 add_action( 'init', 'edd_di_textdomain' );
 
-
 /**		
  * Hook into save filter and add the download image fields
  * @since 1.0 
 */
 function edd_di_metabox_fields_save( $fields ) {
-
 	$fields[] = 'edd_download_images';
 
 	return $fields;
 }
 add_filter( 'edd_metabox_fields_save', 'edd_di_metabox_fields_save' );
-
 
 /**
  * Gets all images for a download.
@@ -39,7 +35,6 @@ add_filter( 'edd_metabox_fields_save', 'edd_di_metabox_fields_save' );
  * @return      array	
  */
 function edd_di_get_images() {
-
 	$images = array();
 	$download_images = get_post_meta( get_the_ID(), 'edd_download_images', true );
 
@@ -71,25 +66,30 @@ function edd_di_display_images() {
  * @since 1.0
  * @return array
  */
-function edd_sanitize_images_save( $images ) {
+function edd_di_sanitize_images_save( $images ) {
 	// Make sure all files are rekeyed starting at 0
 	return array_values( $images );
 }
-add_filter( 'edd_metabox_save_edd_download_images', 'edd_sanitize_images_save' );
+add_filter( 'edd_metabox_save_edd_download_images', 'edd_di_sanitize_images_save' );
 
+/**
+ * Add new metabox
+ *
+ * @since 1.1
+*/
+function edd_di_add_meta_box() {
+	add_meta_box( 'edd_download_images', sprintf( __( '%1$s Images', 'edd-di' ), edd_get_label_singular(), edd_get_label_plural() ),  'edd_di_render_download_images_field', 'download', 'normal', 'high' );
+}
+add_action( 'add_meta_boxes', 'edd_di_add_meta_box' );
 
 /**
  * Render the download images fields
  * @since 1.0 
  */
-function edd_render_download_images_field( $post_id ) {
+function edd_di_render_download_images_field( $post_id ) {
 	$images = edd_di_get_images();
 ?>
 	<div id="edd_download_images">
-
-		<p>
-			<strong><?php _e( 'Download Images:', 'edd-di' ); ?></strong>
-		</p>
 
 		<input type="hidden" id="edd_download_images" class="edd_repeatable_upload_name_field" value=""/>
 
@@ -111,14 +111,14 @@ function edd_render_download_images_field( $post_id ) {
 							$args = apply_filters( 'edd_image_row_args', compact( 'image' ), $value );
 				?>
 						<tr class="edd_repeatable_upload_wrapper">
-							<?php do_action( 'edd_render_image_row', $key, $args, $post_id ); ?>
+							<?php do_action( 'edd_di_render_image_row', $key, $args, $post_id ); ?>
 						</tr>
 				<?php
 						endforeach;
 					else :
 				?>
 					<tr class="edd_repeatable_upload_wrapper">
-						<?php do_action( 'edd_render_image_row', 0, array(), $post_id ); ?>
+						<?php do_action( 'edd_di_render_image_row', 0, array(), $post_id ); ?>
 					</tr>
 				<?php endif; ?>
 					<tr>
@@ -132,14 +132,13 @@ function edd_render_download_images_field( $post_id ) {
 	</div>
 <?php
 }
-add_action( 'edd_meta_box_fields', 'edd_render_download_images_field', 30 );
-
+add_action( 'edd_di_meta_box_images_fields', 'edd_di_render_download_images_field', 30 );
 
 /**
  * Individual image row.
  * @since       1.0  
  */
-function edd_render_image_row( $key = '', $args = array(), $post_id ) {
+function edd_di_render_image_row( $key = '', $args = array(), $post_id ) {
 	$defaults = array(
 		'image' => null,
 	);
@@ -148,13 +147,11 @@ function edd_render_image_row( $key = '', $args = array(), $post_id ) {
 	extract( $args, EXTR_SKIP );
 
 ?>
-
 	<td>
 		<div class="edd_repeatable_upload_field_container">
 			<input type="text" class="edd_repeatable_upload_field edd_upload_field" name="edd_download_images[<?php echo $key; ?>][image]" id="edd_download_images[<?php echo $key; ?>][image]" value="<?php echo $image; ?>" placeholder="<?php _e( 'http://', 'edd-di' ); ?>" style="width:100%" />
-
 			<span class="edd_upload_file">
-				<a href="#" data-uploader_title="" data-uploader_button_text="<?php _e( 'Insert', 'edd-di' ); ?>" class="edd_upload_image_button" onclick="return false;"><?php _e( 'Upload an Image', 'edd-di' ); ?></a>
+				<a href="#" data-uploader_title="" data-uploader_button_text="<?php _e( 'Insert', 'edd-di' ); ?>" class="edd_upload_file_button" onclick="return false;"><?php _e( 'Upload an Image', 'edd-di' ); ?></a>
 			</span>
 		</div>
 	</td>
@@ -166,8 +163,7 @@ function edd_render_image_row( $key = '', $args = array(), $post_id ) {
 	</td>
 <?php
 }
-add_action( 'edd_render_image_row', 'edd_render_image_row', 10, 3 );
-
+add_action( 'edd_di_render_image_row', 'edd_di_render_image_row', 10, 3 );
 
 /**
  * Don't save blank rows.
@@ -177,7 +173,7 @@ add_action( 'edd_render_image_row', 'edd_render_image_row', 10, 3 );
  * be saved.
  * @since 1.0
  */
-function edd_metabox_image_save_check_blank_rows( $new ) {
+function edd_di_metabox_image_save_check_blank_rows( $new ) {
 	foreach ( $new as $key => $value ) {
 		if ( empty( $value['image'] ) )
 			unset( $new[ $key ] );
@@ -185,14 +181,12 @@ function edd_metabox_image_save_check_blank_rows( $new ) {
 
 	return $new;
 }
-add_filter( 'edd_metabox_save_edd_download_images', 'edd_metabox_image_save_check_blank_rows' );
-
+add_filter( 'edd_metabox_save_edd_download_images', 'edd_di_metabox_image_save_check_blank_rows' );
 
 /**		
  * Shortcode
  * @since 1.0
 */
-
 function edd_di_shortcode( $atts ) {
 	edd_di_display_images();
 }

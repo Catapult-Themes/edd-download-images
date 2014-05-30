@@ -1,9 +1,10 @@
 === EDD Download Images ===
 Contributors: sumobi
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EFUPMPEZPGW7L
 Tags: easy digital downloads, digital downloads, e-downloads, edd, images, additional images, download images, sumobi
 Requires at least: 3.3
-Tested up to: 3.5.1
-Stable tag: 1.0
+Tested up to: 3.9 alpha
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,7 +12,7 @@ A plugin for Easy Digital Downloads so you can add extra download images and eas
 
 == Description ==
 
-This plugin requires [Easy Digital Downloads](http://wordpress.org/extend/plugins/easy-digital-downloads/ "Easy Digital Downloads"). This plugin allows you to add extra images to your downloads. Use the included shortcode or template tag to display the images on your website. Developers can also use this plugin to get an array of the images and display the images any way they wish (eg slideshow).
+This plugin requires [Easy Digital Downloads](http://wordpress.org/extend/plugins/easy-digital-downloads/ "Easy Digital Downloads") v1.9 or higher. This plugin allows you to add extra images to your downloads. Use the included shortcode or template tag to display the images on your website. Developers can also use this plugin to get an array of the images and display the images any way they wish (eg slideshow).
 
 = Shortcode Usage =
 
@@ -19,9 +20,8 @@ This plugin requires [Easy Digital Downloads](http://wordpress.org/extend/plugin
 
 = Template Tag Usage =
 
-
     if( function_exists( 'edd_di_display_images') ) {
-	    edd_di_display_images();
+        edd_di_display_images();
     }
 
 = Filtering the HTML =    
@@ -29,9 +29,9 @@ This plugin requires [Easy Digital Downloads](http://wordpress.org/extend/plugin
 To alter the HTML, the following filter is provided (example shows an extra `<div>` being added around image). Paste this into your functions.php and modify $html to your liking:
 
     function themename_edd_di_display_images( $html, $download_image ) {
-	    // here a div tag is wrapped around each image
-	    $html = '<div><img class="edd-di-image" src="' . $download_image['image'] . '" /></div>';
-	    return $html;
+        // here a div tag is wrapped around each image
+        $html = '<div><img class="edd-di-image" src="' . $download_image['image'] . '" /></div>';
+        return $html;
     }
     add_filter( 'edd_di_display_images', 'themename_edd_di_display_images', 10, 2 );
 
@@ -50,11 +50,35 @@ To get the array of images from the Database you can use the following. This wil
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Add additional images to each download
 
+**Extensions for Easy Digital Downloads**
+
+[https://easydigitaldownloads.com/extensions/](https://easydigitaldownloads.com/extensions/?ref=166 "Plugins for Easy Digital Downloads")
+
+**Tips for Easy Digital Downloads**
+
+[http://sumobi.com/blog](http://sumobi.com/blog "Tips for Easy Digital Downloads")
+
+**Stay up to date**
+
+*Follow me on Twitter* 
+[http://twitter.com/sumobi_](http://twitter.com/sumobi_ "Twitter")
+
+*Become a fan on Facebook* 
+[http://www.facebook.com/sumobicom](http://www.facebook.com/sumobicom "Facebook")
+
 == Screenshots ==
 
 1. The new repeatable image upload fields integrated seamlessly with Easy Digital Downloads
 
+== Upgrade Notice ==
+
+= 1.1 =
+Fixed to work with EDD v1.9. Requires Easy Digital Downloads v1.9 or greater
+
 == Changelog ==
+
+= 1.1 =
+* Fix: Now working for EDD v1.9
 
 = 1.0 =
 * Initial release
