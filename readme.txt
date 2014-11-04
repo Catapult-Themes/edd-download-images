@@ -3,16 +3,16 @@ Contributors: sumobi
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EFUPMPEZPGW7L
 Tags: easy digital downloads, digital downloads, e-downloads, edd, images, additional images, download images, sumobi
 Requires at least: 3.3
-Tested up to: 3.9 alpha
-Stable tag: 1.1.2
+Tested up to: 4.0
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A plugin for Easy Digital Downloads so you can add extra download images and easily display them.
+Easily add extra download images and display them.
 
 == Description ==
 
-This plugin requires [Easy Digital Downloads](http://wordpress.org/extend/plugins/easy-digital-downloads/ "Easy Digital Downloads") v1.9 or higher. This plugin allows you to add extra images to your downloads. Use the included shortcode or template tag to display the images on your website. Developers can also use this plugin to get an array of the images and display the images any way they wish (eg slideshow).
+This plugin requires [Easy Digital Downloads](http://wordpress.org/extend/plugins/easy-digital-downloads/ "Easy Digital Downloads") v2.0 or higher. This plugin allows you to add extra images to your downloads. Use the included shortcode or template tag to display the images on your website. Developers can also use this plugin to get an array of the images and display the images any way they wish (eg slideshow).
 
 = Shortcode Usage =
 
@@ -100,10 +100,13 @@ To fund ongoing development of more [free EDD plugins](http://profiles.wordpress
 
 == Upgrade Notice ==
 
-= 1.1.2 =
-Fixed template tag not working from previous update
+= 1.1.3 =
+* Fix: If there were more than 3 images, they weren't being saved properly due to recent changes in EDD
 
 == Changelog ==
+
+= 1.1.3 =
+* Fix: If there were more than 3 images, they weren't being saved properly due to recent changes in EDD
 
 = 1.1.2 =
 * Fix: template tag not working from previous update

@@ -3,7 +3,7 @@
 Plugin Name: EDD Download Images
 Plugin URI: http://sumobi.com/shop/edd-download-images/
 Description: Allows you to add additional images to a download
-Version: 1.1.2
+Version: 1.1.3
 Author: Andrew Munro, Sumobi
 Author URI: http://sumobi.com
 License: GPL-2.0+
@@ -119,7 +119,7 @@ function edd_di_render_download_images_field( $post_id ) {
 
 							$args = apply_filters( 'edd_image_row_args', compact( 'image' ), $value );
 				?>
-						<tr class="edd_repeatable_upload_wrapper">
+						<tr class="edd_repeatable_upload_wrapper edd_repeatable_row" data-key="<?php echo esc_attr( $key ); ?>">
 							<?php do_action( 'edd_di_render_image_row', $key, $args, $post_id ); ?>
 						</tr>
 				<?php
@@ -132,7 +132,7 @@ function edd_di_render_download_images_field( $post_id ) {
 				<?php endif; ?>
 					<tr>
 						<td class="submit" colspan="4" style="float: none; clear:both; background: #fff;">
-							<a class="button-secondary edd_add_repeatable" style="margin: 6px 0;"><?php _e( 'Add New Image', 'edd-di' ); ?></a>
+							<a class="button-secondary edd_add_repeatable" style="margin: 6px 0 10px;"><?php _e( 'Add New Image', 'edd-di' ); ?></a>
 						</td>
 					</tr>
 				</tbody>
