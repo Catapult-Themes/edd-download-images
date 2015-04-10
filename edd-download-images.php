@@ -8,6 +8,9 @@ Author: Andrew Munro, Sumobi
 Author URI: http://sumobi.com
 License: GPL-2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
+
+Text Domain: edd-di
+Domain Path: languages
 */
 
 /**
@@ -18,9 +21,9 @@ function edd_di_textdomain() {
 }
 add_action( 'init', 'edd_di_textdomain' );
 
-/**		
+/**
  * Hook into save filter and add the download image fields
- * @since 1.0 
+ * @since 1.0
 */
 function edd_di_metabox_fields_save( $fields ) {
 	$fields[] = 'edd_download_images';
@@ -32,7 +35,7 @@ add_filter( 'edd_metabox_fields_save', 'edd_di_metabox_fields_save' );
 /**
  * Gets all images for a download.
  * @since       1.0
- * @return      array	
+ * @return      array
  */
 function edd_di_get_images() {
 	$images = array();
@@ -43,7 +46,7 @@ function edd_di_get_images() {
 	return $images;
 }
 
-/**		
+/**
  * Outputs each images with a CSS of 'edd-di-image'
  * @since 1.0
 */
@@ -55,9 +58,9 @@ function edd_di_display_images( $shortcode = false ) {
 		foreach ( $download_images as $download_image ) {
 			$html = '<img class="edd-di-image" src="' . $download_image['image'] . '" />';
 			echo apply_filters( 'edd_di_display_images', $html, $download_image );
-		}	
+		}
 	}
-	
+
 	$images = ob_get_clean();
 
 	if ( $shortcode ) {
@@ -66,7 +69,7 @@ function edd_di_display_images( $shortcode = false ) {
 	else {
 		echo $images;
 	}
-	
+
 }
 
 /**
@@ -93,7 +96,7 @@ add_action( 'add_meta_boxes', 'edd_di_add_meta_box' );
 
 /**
  * Render the download images fields
- * @since 1.0 
+ * @since 1.0
  */
 function edd_di_render_download_images_field( $post_id ) {
 	$images = edd_di_get_images();
@@ -145,7 +148,7 @@ add_action( 'edd_di_meta_box_images_fields', 'edd_di_render_download_images_fiel
 
 /**
  * Individual image row.
- * @since       1.0  
+ * @since       1.0
  */
 function edd_di_render_image_row( $key = '', $args = array(), $post_id ) {
 	$defaults = array(
@@ -192,7 +195,7 @@ function edd_di_metabox_image_save_check_blank_rows( $new ) {
 }
 add_filter( 'edd_metabox_save_edd_download_images', 'edd_di_metabox_image_save_check_blank_rows' );
 
-/**		
+/**
  * Shortcode
  * @since 1.0
 */
