@@ -8,6 +8,9 @@ Author: Andrew Munro, Sumobi
 Author URI: http://sumobi.com
 License: GPL-2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
+
+Text Domain: edd-di
+Domain Path: languages
 */
 
 /**
