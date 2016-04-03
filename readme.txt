@@ -1,10 +1,9 @@
 === EDD Download Images ===
 Contributors: sumobi
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EFUPMPEZPGW7L
 Tags: easy digital downloads, digital downloads, e-downloads, edd, images, additional images, download images, sumobi
 Requires at least: 3.3
-Tested up to: 4.0
-Stable tag: 1.1.3
+Tested up to: 4.4.2
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +11,7 @@ Easily add extra download images and display them.
 
 == Description ==
 
-This plugin requires [Easy Digital Downloads](http://wordpress.org/extend/plugins/easy-digital-downloads/ "Easy Digital Downloads") v2.0 or higher. This plugin allows you to add extra images to your downloads. Use the included shortcode or template tag to display the images on your website. Developers can also use this plugin to get an array of the images and display the images any way they wish (eg slideshow).
+This plugin requires [Easy Digital Downloads](http://wordpress.org/extend/plugins/easy-digital-downloads/ "Easy Digital Downloads") v2.5 or higher. This plugin allows you to add extra images to your downloads. Use the included shortcode or template tag to display the images on your website. Developers can also use this plugin to get an array of the images and display the images any way they wish (eg slideshow).
 
 = Shortcode Usage =
 
@@ -24,7 +23,7 @@ This plugin requires [Easy Digital Downloads](http://wordpress.org/extend/plugin
         edd_di_display_images();
     }
 
-= Filtering the HTML =    
+= Filtering the HTML =
 
 To alter the HTML, the following filter is provided (example shows an extra `<div>` being added around image). Paste this into your functions.php and modify $html to your liking:
 
@@ -35,7 +34,7 @@ To alter the HTML, the following filter is provided (example shows an extra `<di
     }
     add_filter( 'edd_di_display_images', 'themename_edd_di_display_images', 10, 2 );
 
-= Developers =  
+= Developers =
 
 To get the array of images from the Database you can use the following. This will be useful if you'd like to build a slideshow to show all the download's images:
 
@@ -44,33 +43,9 @@ To get the array of images from the Database you can use the following. This wil
     // see the images in the array
     var_dump( $images );
 
-**Want more free EDD plugins?**
-
-To fund ongoing development of more [free EDD plugins](http://profiles.wordpress.org/sumobi#content-plugins), I would greatly appreciate any of the below:
-
-1. [Buy one of my commercial EDD plugins](https://easydigitaldownloads.com/blog/author/andrewmunro/?ref=166 "Buy one of my commercial EDD plugins")
-
-1. [Use my referral code when you purchase your next EDD plugin](https://easydigitaldownloads.com/extensions/?ref=166 "Use my referral code when you purchase your next EDD plugin")
-
-1. [Donate via PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EFUPMPEZPGW7L "Donate via PayPal")
-
 **Plugins for Easy Digital Downloads**
 
-[https://easydigitaldownloads.com/extensions/](https://easydigitaldownloads.com/extensions/?ref=166 "Plugins for Easy Digital Downloads")
-
-**Tips for Easy Digital Downloads**
-
-[http://sumobi.com/blog](http://sumobi.com/blog "Tips for Easy Digital Downloads")
-
-**Stay up to date**
-
-*Follow me on Twitter* 
-
-[http://twitter.com/sumobi_](http://twitter.com/sumobi_ "Twitter")
-
-*Become a fan on Facebook* 
-
-[http://www.facebook.com/sumobicom](http://www.facebook.com/sumobicom "Facebook")
+[https://easydigitaldownloads.com/extensions/](https://easydigitaldownloads.com/extensions/ "Plugins for Easy Digital Downloads")
 
 == Installation ==
 
@@ -80,19 +55,14 @@ To fund ongoing development of more [free EDD plugins](http://profiles.wordpress
 
 **Extensions for Easy Digital Downloads**
 
-[https://easydigitaldownloads.com/extensions/](https://easydigitaldownloads.com/extensions/?ref=166 "Plugins for Easy Digital Downloads")
+[https://easydigitaldownloads.com/extensions/](https://easydigitaldownloads.com/extensions/ "Extensions for Easy Digital Downloads")
 
 **Tips for Easy Digital Downloads**
 
 [http://sumobi.com/blog](http://sumobi.com/blog "Tips for Easy Digital Downloads")
 
-**Stay up to date**
-
-*Follow me on Twitter* 
+**Follow me on Twitter**
 [http://twitter.com/sumobi_](http://twitter.com/sumobi_ "Twitter")
-
-*Become a fan on Facebook* 
-[http://www.facebook.com/sumobicom](http://www.facebook.com/sumobicom "Facebook")
 
 == Screenshots ==
 
@@ -100,10 +70,15 @@ To fund ongoing development of more [free EDD plugins](http://profiles.wordpress
 
 == Upgrade Notice ==
 
-= 1.1.3 =
-* Fix: If there were more than 3 images, they weren't being saved properly due to recent changes in EDD
+= 1.2 =
+* Fix: Images sometimes were not being saved correctly on first save
+* New: Images can now be reordered via drag and drop. Requires EDD 2.5+
 
 == Changelog ==
+
+= 1.2 =
+* Fix: Images sometimes were not being saved correctly on first save
+* New: Images can now be reordered via drag and drop. Requires EDD 2.5+
 
 = 1.1.3 =
 * Fix: If there were more than 3 images, they weren't being saved properly due to recent changes in EDD
