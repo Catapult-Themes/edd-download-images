@@ -3,7 +3,7 @@
 Plugin Name: EDD Download Images
 Plugin URI: http://sumobi.com/shop/edd-download-images/
 Description: Allows you to add additional images to a download and show them on your website
-Version: 1.2
+Version: 1.2.1
 Author: Andrew Munro, Sumobi
 Author URI: http://sumobi.com
 License: GPL-2.0+
@@ -73,6 +73,31 @@ function edd_di_display_images( $shortcode = false ) {
 }
 
 /**
+ * Outputs each image using its ID
+ * @param $size	Optionally set image size
+ * @since 1.2.1
+*/
+function edd_di_display_images_by_id( $size='thumbnail' ) {
+	ob_start();
+	$download_images = edd_di_get_images();
+
+	if ( $download_images ) {
+		foreach ( $download_images as $download_image ) {
+			// Check that ID exists
+			if( isset( $download_image['id'] ) ) {
+				$html = wp_get_attachment_image( $download_image['id'], $size );
+				echo apply_filters( 'edd_di_display_images_by_id', $html, $download_image, false, array( 'class' => 'edd-di-attachment-image' ) );
+			}
+		}
+	}
+
+	$images = ob_get_clean();
+
+	echo $images;
+
+}
+
+/**
  * Sanitize the images downloads
  * Ensures files are correctly mapped to an array starting with an index of 0
  * @since 1.0
@@ -122,8 +147,9 @@ function edd_di_render_download_images_field( $post_id ) {
 						foreach ( $images as $key => $value ) :
 							$index = isset( $value['index'] ) ? $value['index'] : $key;
 							$image = isset( $value['image'] ) ? $value['image'] : '';
-
-							$args = apply_filters( 'edd_image_row_args', compact( 'image' ), $value );
+							$id = isset( $value['id'] ) ? $value['id'] : '';
+							
+							$args = apply_filters( 'edd_image_row_args', compact( 'image', 'id' ), $value );
 				?>
 						<tr class="edd_repeatable_upload_wrapper edd_repeatable_row" data-key="<?php echo esc_attr( $key ); ?>">
 							<?php do_action( 'edd_di_render_image_row', $key, $args, $post_id, $index ); ?>
@@ -157,9 +183,10 @@ add_action( 'edd_di_meta_box_images_fields', 'edd_di_render_download_images_fiel
  */
 function edd_di_render_image_row( $key = '', $args = array(), $post_id, $index ) {
 	$defaults = array(
-		'image' => null,
+		'image' 	=> null,
+		'id'	=> null
 	);
-
+	
 	$args = wp_parse_args( $args, $defaults );
 	extract( $args, EXTR_SKIP );
 
@@ -167,6 +194,7 @@ function edd_di_render_image_row( $key = '', $args = array(), $post_id, $index )
 	<td>
 		<span class="edd_draghandle"></span>
 		<input type="hidden" name="edd_download_images[<?php echo $key; ?>][index]" class="edd_repeatable_index" value="<?php echo $index; ?>"/>
+		<input type="hidden" name="edd_download_images[<?php echo $key; ?>][id]" class="edd_repeatable_attachment_id_field" value="<?php echo $id; ?>"/>
 	</td>
 	<td>
 		<div class="edd_repeatable_upload_field_container">
@@ -195,7 +223,7 @@ add_action( 'edd_di_render_image_row', 'edd_di_render_image_row', 10, 4 );
  * @since 1.0
  */
 function edd_di_metabox_image_save_check_blank_rows( $new ) {
-
+	
 	foreach ( $new as $key => $value ) {
 
 		if ( empty( $value['image'] ) ) {
@@ -203,7 +231,6 @@ function edd_di_metabox_image_save_check_blank_rows( $new ) {
 			unset( $new[ $key ] );
 		}
 	}
-
 	return $new;
 }
 add_filter( 'edd_metabox_save_edd_download_images', 'edd_di_metabox_image_save_check_blank_rows' );
